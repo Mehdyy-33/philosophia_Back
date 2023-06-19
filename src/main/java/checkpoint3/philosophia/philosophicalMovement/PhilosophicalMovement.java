@@ -1,16 +1,13 @@
-package checkpoint3.philosophia.philosophicalCurrent;
+package checkpoint3.philosophia.philosophicalMovement;
 
 import checkpoint3.philosophia.thinker.Thinker;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -18,12 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PhilosophicalMovement {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
-    private List<String> conceptList;
-    private List<Thinker> thinkerList;
+
+    @ManyToOne
+    @JsonIgnoreProperties("philosophicalMovementsList")
+    private Thinker thinker;
+
 }
